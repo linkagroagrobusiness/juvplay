@@ -1,60 +1,92 @@
-import React, { useEffect, useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography } from '@mui/material';
-import AudioPlayerFooter from './AudioPlayerFooter';
+import React, { useEffect, useState, useMemo } from 'react';
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography, IconButton } from '@mui/material';
 import { PlayArrow, Pause } from '@mui/icons-material';
 import { useAudioPlayer } from '../context/AudioPlauseContext';
-import capa2 from '../assets/imgs/capa2.jpeg';
-import capa3 from '../assets/imgs/capa3.jpeg';
-import capa5 from '../assets/imgs/capa5.jpeg';
+import epi1 from '../assets/imgs/epi1.jpeg';
+
 
 import Episodio01Part1 from '../assets/audios/Episodio01Part1.mp3';
 import Episodio02Part1 from '../assets/audios/Episodio02Part1.mp3';
 import Episodio01Part2 from '../assets/audios/Episodio01Part2.mp3';
-
+import Episodio02Part2 from '../assets/audios/Episodio02Part2.mp3';
+import Episodio03Part1 from '../assets/audios/Episodio03Part1.mp3';
+import Episodio03Part2 from '../assets/audios/Episodio03Part2.mp3';
+import Episodio04Part1 from '../assets/audios/Episodio04Part1.mp3';
+import Episodio04Part2 from '../assets/audios/Episodio04Part2.mp3';
+import Episodio05Part1 from '../assets/audios/Episodio05Part1.mp3';
+import Episodio05Part2 from '../assets/audios/Episodio05Part2.mp3';
+import Episodio06Part1 from '../assets/audios/Episodio06Part1.mp3';
+import Episodio06Part2 from '../assets/audios/Episodio06Part2.mp3';
+import Episodio07Part1 from '../assets/audios/Episodio07Part1.mp3';
+import Episodio07Part2 from '../assets/audios/Episodio07Part2.mp3';
+import Episodio08Part1 from '../assets/audios/Episodio08Part1.mp3';
+import Episodio08Part2 from '../assets/audios/Episodio08Part2.mp3';
+import Episodio09Part1 from '../assets/audios/Episodio09Part1.mp3';
+import Episodio09Part2 from '../assets/audios/Episodio09Part2.mp3';
+import Episodio10Part1 from '../assets/audios/Episodio10Part1.mp3';
+import Episodio10Part2 from '../assets/audios/Episodio10Part2.mp3';
 
 
 import { Link } from 'react-router-dom';
 
 const CardEpisodios = () => {
     const [open, setOpen] = useState(false);
-    const [isPlaying, setIsPlaying] = useState(false);
 
-    const { togglePlay, setEpisodio, episodio, setListaEpisodio } = useAudioPlayer();
+    // Substituir ou adicionar outras imagens se tiveres mais capas
+    const capas = useMemo(() => {
+      return [epi1, epi1, epi1, epi1, epi1, epi1, epi1, epi1, epi1, epi1];
+    },[]);
+
+    const { setEpisodio, isPlaying, setIsPlayOpen, episodio, setListaEpisodio } = useAudioPlayer();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const episodios = [
-    {
-        titulo: `Episódio 01 Parte 1`,
-        duracao: `00:00`,
-        descricao: `Descrição do episódio Episódio 01 Parte 1. Este episódio cobre vários temas interessantes com narrativa envolvente e um elenco de destaque.`,
-        elenco: [`Ator`, `Ator`],
-        imagemUrl: capa5,
-        audioUrl: Episodio01Part1,
-    },
-    {
-        titulo: `Episódio 02 Parte 1`,
-        duracao: `00:00`,
-        descricao: `Descrição do episódio Episódio 02 Parte 1. Este episódio cobre vários temas interessantes com narrativa envolvente e um elenco de destaque.`,
-        elenco: [`Ator`, `Ator`],
-        imagemUrl: capa3,
-        audioUrl: Episodio02Part1,
-    },
-    {
-        titulo: `Episódio 01 Parte 2`,
-        duracao: `00:00`,
-        descricao: `Descrição do episódio Episódio 03 Parte 1. Este episódio cobre vários temas interessantes com narrativa envolvente e um elenco de destaque.`,
-        elenco: [`Ator`, `Ator`],
-        imagemUrl: capa2,
-        audioUrl: Episodio01Part2,
-    }
-    ];
+   
+    const episodios = useMemo(() => {
+      const lista = [];
+    
+      const audios = [
+        [Episodio01Part1, Episodio01Part2],
+        [Episodio02Part1, Episodio02Part2],
+        [Episodio03Part1, Episodio03Part2],
+        [Episodio04Part1, Episodio04Part2],
+        [Episodio05Part1, Episodio05Part2],
+        [Episodio06Part1, Episodio06Part2],
+        [Episodio07Part1, Episodio07Part2],
+        [Episodio08Part1, Episodio08Part2],
+        [Episodio09Part1, Episodio09Part2],
+        [Episodio10Part1, Episodio10Part2],
+      ];
+    
+      for (let i = 0; i < audios.length; i++) {
+        lista.push({
+          titulo: `Episódio ${String(i + 1).padStart(2, '0')} Parte 1`,
+          duracao: '00:00',
+          descricao: `Descrição do episódio Episódio ${String(i + 1).padStart(2, '0')} Parte 1. Descrição do episódio Episódio ${String(i + 1).padStart(2, '0')} Parte 1.`,
+          elenco: ['Ator', 'Ator'],
+          imagemUrl: capas[i] || epi1,
+          audioUrl: audios[i][0],
+        });
+        lista.push({
+          titulo: `Episódio ${String(i + 1).padStart(2, '0')} Parte 2`,
+          duracao: '00:00',
+          descricao: `Descrição do episódio Episódio ${String(i + 1).padStart(2, '0')} Parte 2. Descrição do episódio Episódio ${String(i + 1).padStart(2, '0')} Parte 2.`,
+          elenco: ['Ator', 'Ator'],
+          imagemUrl: capas[i] || epi1,
+          audioUrl: audios[i][1],
+        });
+      }
+    
+      return lista;
+    }, [capas]);
+
 
     useEffect(() => {
-        setListaEpisodio(episodios); // Atualiza a lista de episódios no contexto
+        setListaEpisodio(()=>episodios); // Atualiza a lista de episódios no contexto
     }, [episodios, setListaEpisodio]);
 
-  const handleOpenDialog = (episodio) => {
-    setEpisodio(episodio);
+
+  const handleOpenDialog = (_episodio) => {
+    setEpisodio((prevState)=> _episodio);
     setOpen(true);
   };
 
@@ -63,47 +95,46 @@ const CardEpisodios = () => {
     setEpisodio(null);
   };
 
-  // Função para alternar o estado de play/pause
-  const _togglePlay = () => {
-    setIsPlaying(!isPlaying);
-  };
 
   // Função para mudar o episódio, e ao mesmo tempo controlar a reprodução
-  const handleEpisodeClick = (episodio) => {
-    setEpisodio(episodio); // Seleciona o episódio
-    setIsPlaying(true); // Começa a reprodução quando o episódio é 
+  const handleEpisodeClick = (_episodio) => {
+    setEpisodio((prevState)=> _episodio); // Seleciona o episódio
+    if(episodio === _episodio) {
+      setIsPlayOpen((prevstate)=> !isPlaying); // Pausa a reprodução quando o episódio é o mesmo
+      
+    }else{
+      setIsPlayOpen((prevstate)=> true); // Inicia a reprodução quando o episódio é diferente
+    }
+     // Pausa a reprodução quando o episódio é o mesmo
+    
   };
 
   return (
     <>
       <div className="row">
-        {episodios.map((episodio, index) => (
-          <div className="col-md-4 mb-3" key={index}>
-            <div className="episodio-card">
+        {episodios.map((_episodio, index) => (
+          <div className="col-md-3 mb-2" key={index}>
+            <div className={`episodio-card ${isPlaying && episodio === _episodio ? 'active' : ''}`} >
                 <div className="episodio-capa">
-                    <img src={episodio.imagemUrl} alt={episodio.titulo} />
-                    <div className='episodio-play-pause' onClick={() => handleEpisodeClick(episodio)}>
-                        <Button className="play-button" onClick={() => setEpisodio(episodio)}>
-                            {isPlaying && episodio=== episodio ? (
-                            <Pause style={styles.icon} />
+                    <img src={_episodio.imagemUrl} alt={_episodio.titulo} />
+                    <div className='episodio-play-pause' >
+                      <IconButton className="play-button bg-btn-play" onClick={() => handleEpisodeClick(_episodio)} color="primary">
+                        {isPlaying && episodio=== _episodio ? (
+                            {isPlaying} ? <Pause  /> : <PlayArrow />
                             ) : (
-                            <PlayArrow style={styles.icon} />
-                            )}
-                        </Button>
+                            <PlayArrow  />
+                          )}
+                      </IconButton>
                     </div>
                 </div>
 
-                <div className="episodio-body m-2">
-                    <h5 className='episodio-titulo'>{episodio.titulo}</h5>
-                    <div className="d-flex pb-2">
+                <div className="episodio-bodys m-2 p-2">
+                    <h5 className='episodio-titulo'>{_episodio.titulo}</h5>
+                    <div className="d-flex pb-2 d-non">
                         <div className='p-0'>
-                            <small className='clamp-1'>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                                Quaerat magnam dolore adipisci officiis hic non voluptas rem voluptates optio quos accusantium quisquam, 
-                                at, vel corrupti perspiciatis, sunt laudantium rerum veniam?
-                            </small>
+                            <small className='clamp-1'> {_episodio.descricao} </small>
                         </div>
-                        <Link className='small episodio-vermais d-flex  w-100' onClick={() => handleOpenDialog(episodio)}>ver mais</Link>
+                        <Link className='small episodio-vermais d-flex  w-100' onClick={() => handleOpenDialog(_episodio)}>ver mais</Link>
                     </div>
                 </div>
                 
@@ -142,44 +173,9 @@ const CardEpisodios = () => {
           </>
         )}
       </Dialog>
-
-      
-      
     </>
   );
 };
 
-const styles = {
-  card: {
-    border: '1px solid #ccc',
-    borderRadius: '8px',
-    padding: '16px',
-    margin: '16px 0',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-    minHeight: '280px',
-  },
-  title: {
-    fontSize: '1.5rem',
-    marginBottom: '8px',
-  },
-  description: {
-    fontSize: '1rem',
-    marginBottom: '16px',
-    color: '#eee',
-  },
-  verMais: {
-    color: '#00BFFF',
-    cursor: 'pointer',
-    textDecoration: 'underline',
-  },
-  playButton: {
-    cursor: 'pointer',
-    padding: '10px',
-  },
-  icon: {
-    fontSize: '30px',
-    color: '#fff',
-  },
-};
 
 export default CardEpisodios;

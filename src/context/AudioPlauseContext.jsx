@@ -8,7 +8,7 @@ export const MenuProvider = ({ children }) => {
     const [isPlaying, setIsPlayOpen] = useState(false);
     const [episodio, setEpisodio] = useState(null);
     const [Listaepisodio, setListaEpisodio] = useState(null);
-
+    const [tempo, setTempo] = useState(0.0); // Tempo atual do áudio
 
     const handleEpisodeClicked = (episodio) => {
         setEpisodio(episodio); // Seleciona o episódio
@@ -20,7 +20,7 @@ export const MenuProvider = ({ children }) => {
     };
 
     return (
-        <MenuContext.Provider value={{ isPlaying, togglePlay, setIsPlayOpen, episodio, handleEpisodeClicked, setEpisodio, Listaepisodio, setListaEpisodio }}>
+        <MenuContext.Provider value={{ tempo, setTempo, isPlaying, togglePlay, setIsPlayOpen, episodio, handleEpisodeClicked, setEpisodio, Listaepisodio, setListaEpisodio }}>
             {children}
         </MenuContext.Provider>
     );

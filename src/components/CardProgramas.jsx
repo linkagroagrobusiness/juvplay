@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import bannerekoti from '../assets/imgs/bannerekoti.jpeg';
 
 const projetos = [
     {
-        imagem: 'https://picsum.photos/seed/2/300/200',
-        titulo: 'Radio Novela',
-        descricao: 'Descrição do Programa 1',
-        lancamento: '01/01/2023',
+        imagem: bannerekoti,
+        titulo: 'Radionovela EKOTI',
+        descricao: `EKOTI significa “cuidar”, na língua Emakhua. E é exactamente isso que esta história quer provocar em ti: uma vontade de olhar para os outros com mais empatia.
+Mas EKOTI também é denúncia, é emoção, é viragem. É uma radionovela moçambicana feita com alma.`,
+        lancamento: '25/04/2025',
     },
     
 ];
@@ -29,11 +31,7 @@ const CardProgramas = () => {
                         <Link className=' d-flex link-programa w-100' to={`/programa/${index}/`}>{projeto.titulo}</Link>
                         <div className="d-flex pb-2">
                             <div className='p-0'>
-                                <small className='text-muted'>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                                    Quaerat magnam dolore adipisci officiis hic non voluptas rem voluptates optio quos accusantium quisquam, 
-                                    at, vel corrupti perspiciatis, sunt laudantium rerum veniam?
-                                </small>
+                                <small className='text-muted'>{projeto.descricao}</small>
                             </div>
                         </div>
                     </div>
@@ -49,19 +47,3 @@ const CardProgramas = () => {
 
 export default CardProgramas;
 
-// Exemplo de uso:
-// const projetos = [
-//   {
-//     imagem: '/public/images/serie1.jpg',
-//     titulo: 'Série 1',
-//     descricao: 'Descrição da Série 1',
-//     lancamento: '01/01/2023',
-//   },
-//   {
-//     imagem: '/public/images/serie2.jpg',
-//     titulo: 'Série 2',
-//     descricao: 'Descrição da Série 2',
-//     lancamento: '15/02/2023',
-//   },
-// ];
-// <CardProgramas projetos={projetos} />;

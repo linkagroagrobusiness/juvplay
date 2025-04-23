@@ -1,39 +1,52 @@
-import React from "react";
-
+import React, { useEffect, useRef, useState } from "react";
+import RN_EKOTI_Edit_06 from '../assets/banners/RN_EKOTI_Edit_06.mp4';
 
 export default function RadioBanner() {
+  const videoRef = useRef(null);
+  const containerRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.5 } // Só considera visível quando 50% estiver visível
+    );
+
+    const container = containerRef.current; // Evita problemas no cleanup
+    if (container) {
+      observer.observe(container);
+    }
+
+    return () => {
+      if (container) {
+        observer.unobserve(container);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      if (isVisible) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    }
+  }, [isVisible]);
+
   return (
-    <div
-      style={{
-        height: "100vh",
-        width: "100%",
-        position: "relative",
-        overflow: "hidden",
-        color: "white",
-      }}
-    >
+    <div ref={containerRef} className="banner-video">
       <video
-        autoPlay
+        ref={videoRef}
         loop
-        muted
         playsInline
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          zIndex: -1,
-        }}
+        preload="auto"
+        className="w-100"
       >
-        <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4" />
+        <source src={RN_EKOTI_Edit_06} type="video/mp4" />
         Teu browser não suporta vídeo em HTML5.
       </video>
-
-
-     
     </div>
   );
 }
-
